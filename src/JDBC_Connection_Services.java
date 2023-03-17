@@ -194,4 +194,111 @@ public class JDBC_Connection_Services {
         }
 
     }
+
+    public void getSalaryCalculationByGender() {
+
+        String gender;
+        ResultSet resultSet;
+
+        System.out.print("Enter Gender : ");
+        gender = consoleInput.next();
+
+        System.out.println("Press 1 To Get Sum Of The Basic Pay" +
+                "\nPress 2 To Get The AVG of Basic Pay" +
+                "\nPress 3 To Get MIN Basic Pay" +
+                "\nPress 4 To Get MAX Basic Pay" +
+                "\nPress 5 To Get The Count" +
+                "\nPress 6 To Return To The Main Menu\n");
+        System.out.print("Your Choice :");
+        int userInput = consoleInput.nextInt();
+
+        switch (userInput){
+
+            case 1: {
+                try {
+                    preparedStatement = connection.prepareStatement("select sum(basic_pay) from employee_payroll where gender = ? group by gender;");
+                    preparedStatement.setString(1,gender);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()){
+                        System.out.println("Value : " + resultSet.getInt(1));
+                    }
+                    getSalaryCalculationByGender();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            }
+
+            case 2: {
+                try {
+                    preparedStatement = connection.prepareStatement("select avg(basic_pay) from employee_payroll where gender = ? group by gender;");
+                    preparedStatement.setString(1,gender);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()){
+                        System.out.println("Value : " + resultSet.getInt(1));
+                    }
+                    getSalaryCalculationByGender();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+            }
+
+            case 3: {
+                try {
+                    preparedStatement = connection.prepareStatement("select min(basic_pay) from employee_payroll where gender = ? group by gender;");
+                    preparedStatement.setString(1,gender);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()){
+                        System.out.println("Value : " + resultSet.getInt(1));
+                    }
+                    getSalaryCalculationByGender();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            }
+
+            case 4 : {
+                try {
+                    preparedStatement = connection.prepareStatement("select max(basic_pay) from employee_payroll where gender = ? group by gender;");
+                    preparedStatement.setString(1,gender);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()){
+                        System.out.println("Value : " + resultSet.getInt(1));
+                    }
+                    getSalaryCalculationByGender();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            }
+
+            case 5: {
+                try {
+                    preparedStatement = connection.prepareStatement("select count(basic_pay) from employee_payroll where gender = ? group by gender;");
+                    preparedStatement.setString(1,gender);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()){
+                        System.out.println("Value : " + resultSet.getInt(1));
+                    }
+                    getSalaryCalculationByGender();
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            }
+            case 6 : {
+                break;
+            }
+        }
+
+
+    }
 }
