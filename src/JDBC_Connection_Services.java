@@ -1,12 +1,9 @@
-import com.mysql.cj.protocol.a.BinaryResultsetReader;
-
 import java.sql.*;
 import java.util.Scanner;
 
 public class JDBC_Connection_Services {
 
     Connection connection;
-    PreparedStatement preparedStatement;
     Scanner consoleInput = new Scanner(System.in);
 
     public void connection() {
@@ -83,18 +80,12 @@ public class JDBC_Connection_Services {
 
     public void updateData(){
 
-        System.out.print("Enter The Name : ");
-        String name = consoleInput.next();
-        System.out.print("Enter Salary : ");
-        int salary = consoleInput.nextInt();
-
 
         try{
 
-            preparedStatement = connection.prepareStatement("update employee_payroll set basic_pay = ? where Employee_name = ?");
-            preparedStatement.setInt(1,salary);
-            preparedStatement.setString(2,name);
-            int update = preparedStatement.executeUpdate();
+            String updateSQL = "update employee_payroll set basic_pay = 30000 where employee_name = \"Terrisa\"";
+            Statement statement = connection.createStatement();
+            int update = statement.executeUpdate(updateSQL);
 
 
             if (update > 0){
