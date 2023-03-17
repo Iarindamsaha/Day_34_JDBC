@@ -1,17 +1,27 @@
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class JDBC_Connection_Services {
 
     Connection connection;
+    PreparedStatement preparedStatement;
     Scanner consoleInput = new Scanner(System.in);
 
     public void connection() {
-
-        System.out.print("Enter Username : ");
-        String useName = consoleInput.next();
-        System.out.print("Enter Password : ");
-        String passWord = consoleInput.next();
+        String useName = null;
+        String passWord = null;
+        
+        try{
+            System.out.print("Enter Username : ");
+            useName = consoleInput.next();
+            System.out.print("Enter Password : ");
+            passWord = consoleInput.next();            
+        }
+        catch (InputMismatchException im){
+            System.out.println("Enter Valid Input Only");
+        }
+       
 
         String jdbcURL = "jdbc:mysql://localhost:3306/payroll_service";
 
@@ -79,13 +89,22 @@ public class JDBC_Connection_Services {
     }
 
     public void updateData(){
+        String name;
+        int salary;
+
+            System.out.print("Enter The Name : ");
+            name = consoleInput.next();
+            System.out.print("Enter Salary : ");
+            salary = consoleInput.nextInt();
+
 
 
         try{
 
-            String updateSQL = "update employee_payroll set basic_pay = 30000 where employee_name = \"Terrisa\"";
-            Statement statement = connection.createStatement();
-            int update = statement.executeUpdate(updateSQL);
+            preparedStatement = connection.prepareStatement("update employee_payroll set basic_pay = ? where Employee_name = ?");
+            preparedStatement.setInt(1,salary);
+            preparedStatement.setString(2,name);
+            int update = preparedStatement.executeUpdate();
 
 
             if (update > 0){
