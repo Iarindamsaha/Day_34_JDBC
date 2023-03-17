@@ -16,6 +16,7 @@ public class JDBC_Main_Works {
                     "\n--->Press 2 To Get Data From Database<---" +
                     "\n--->Press 3 To Update Salary<---" +
                     "\n--->Press 4 To Get Payroll Data By Name<---" +
+                    "\n--->Press 5 To Get Data Set By Date Range<---" +
                     "\n--->Press 10 to Exit The Program<---" +
                     "\n--->Press 11 To Close The Database Connection<---");
 
@@ -43,6 +44,11 @@ public class JDBC_Main_Works {
 
                 case 4: {
                     services.getDataByName();
+                    break;
+                }
+
+                case 5: {
+                    services.getByDateRange();
                     break;
                 }
 

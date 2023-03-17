@@ -155,4 +155,43 @@ public class JDBC_Connection_Services {
         }
 
     }
+
+    public void getByDateRange() {
+
+        String startingDate;
+        String endingDate;
+
+        System.out.print("Enter The StartingDate : ");
+        startingDate = consoleInput.next();
+        System.out.print("enter The Ending Date : ");
+        endingDate = consoleInput.next();
+
+        try {
+            preparedStatement =connection.prepareStatement("select * from employee_payroll where Starting_Date between cast(? as date) and date (?)");
+            preparedStatement.setString(1, startingDate);
+            preparedStatement.setString(2,endingDate);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+
+                System.out.println("-----------------------------------------------------------");
+                System.out.println("Emp Id: " + resultSet.getInt(1));
+                System.out.println("Employee Name : " + resultSet.getString(2));
+                System.out.println("Employee PhoneNumber : " + resultSet.getLong(3));
+                System.out.println("Department : " + resultSet.getString(4));
+                System.out.println("Gender : " + resultSet.getString(5));
+                System.out.println("Basic_Pay : " + resultSet.getDouble(6));
+                System.out.println("Deduction : " + resultSet.getDouble(7));
+                System.out.println("Taxable_Pay : " + resultSet.getDouble(8));
+                System.out.println("Tax : " + resultSet.getDouble(9));
+                System.out.println("Net Pay : " + resultSet.getDouble(10));
+                System.out.println("Job Starting Date : " + resultSet.getDate(11));
+                System.out.println("-----------------------------------------------------------");
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
