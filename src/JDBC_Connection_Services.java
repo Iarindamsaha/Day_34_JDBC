@@ -161,7 +161,7 @@ public class JDBC_Connection_Services {
 
         System.out.print("Enter The StartingDate : ");
         startingDate = consoleInput.next();
-        System.out.print("enter The Ending Date : ");
+        System.out.print("Enter The Ending Date : ");
         endingDate = consoleInput.next();
 
         try {
