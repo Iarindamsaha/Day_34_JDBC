@@ -97,8 +97,6 @@ public class JDBC_Connection_Services {
             System.out.print("Enter Salary : ");
             salary = consoleInput.nextInt();
 
-
-
         try{
 
             preparedStatement = connection.prepareStatement("update employee_payroll set basic_pay = ? where Employee_name = ?");
@@ -301,4 +299,11 @@ public class JDBC_Connection_Services {
 
 
     }
+
+    public void addNewEmployeeData(){
+
+                
+
+    }
+
 }
